@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FFF5F8">
+<title>精致女孩的一天</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,600;0,800;0,900;1,800;1,900&family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF5F8; --hot:#FF4E8E; --hot2:#E93A7D; --pink:#FFD3E4; --pink2:#FFE9F2;
+  --ink:#3A1B29; --sub:#8A5B70; --gold:#E8B04B; --glass:rgba(255,255,255,.75);
+  --hair:rgba(255,78,142,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Noto Sans SC','PingFang SC',sans-serif;background:var(--bg);color:var(--ink);line-height:1.9;
+  padding:calc(env(safe-area-inset-top) + 44px) 0 90px;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(420px 300px at 12% 4%,rgba(255,78,142,.08),transparent 70%),
+             radial-gradient(380px 280px at 88% 22%,rgba(232,176,75,.07),transparent 70%)}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+header{text-align:center;padding-top:10px}
+.kicker{font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;letter-spacing:5px;color:var(--hot);text-transform:uppercase}
+h1{font-size:30px;font-weight:900;letter-spacing:2px;margin-top:6px}
+h1 .en{display:block;font-family:'Nunito',sans-serif;font-style:italic;font-weight:800;font-size:15px;color:var(--hot);letter-spacing:1px;margin-top:2px}
+.sub{font-size:12.5px;color:var(--sub);letter-spacing:2px;margin-top:6px}
+.hero-band{height:5px;width:120px;margin:16px auto 0;border-radius:99px;
+  background:linear-gradient(90deg,var(--pink),var(--hot),var(--pink));opacity:.7}
+
+/* 今日总览 */
+.today{margin-top:22px;background:var(--glass);border:1.5px solid var(--hair);border-radius:24px;
+  backdrop-filter:blur(8px);padding:20px 18px 16px;box-shadow:0 10px 30px rgba(255,78,142,.08)}
+.trow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tdate{font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;color:var(--hot2)}
+.tstars{font-size:17px;letter-spacing:3px;filter:grayscale(1);opacity:.35;transition:all .4s}
+.tstars .on{filter:none;opacity:1;text-shadow:0 0 10px rgba(255,78,142,.55)}
+.track{height:8px;background:var(--pink2);border-radius:99px;margin-top:12px;overflow:hidden}
+.fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--hot));
+  transition:width .45s cubic-bezier(.2,.8,.3,1)}
+.tmeta{display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--sub);letter-spacing:1.5px;font-weight:700}
+.quote{margin-top:14px;border-top:1px dashed var(--hair);padding-top:12px;text-align:center}
+.q-en{font-family:'Noto Serif SC',serif;font-style:italic;font-size:13.5px;color:var(--ink);line-height:1.7}
+.q-zh{font-size:11px;color:var(--sub);margin-top:3px;letter-spacing:1px}
+.q-btn{border:none;background:none;color:var(--hot2);font-family:'Nunito','Noto Sans SC',sans-serif;
+  font-weight:800;font-size:11px;letter-spacing:2px;cursor:pointer;margin-top:6px}
+.full{display:none;margin-top:14px;text-align:center;background:linear-gradient(135deg,var(--pink2),var(--pink));
+  border-radius:16px;padding:10px;font-weight:900;color:var(--hot2);letter-spacing:2px;font-size:13.5px;
+  animation:glow 1.6s infinite alternate}
+.full.show{display:block}
+@keyframes glow{from{box-shadow:0 0 0 rgba(255,78,142,0)}to{box-shadow:0 6px 22px rgba(255,78,142,.35)}}
+
+/* 时间轴 */
+.tl{position:relative;margin-top:26px;padding-left:30px}
+.tl::before{content:'';position:absolute;left:9px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(180deg,var(--pink),var(--hot) 60%,var(--pink));opacity:.4;border-radius:2px}
+.phase{position:relative;margin-bottom:22px}
+.dot{position:absolute;left:-30px;top:22px;width:20px;height:20px;border-radius:50%;
+  background:#fff;border:2.5px solid var(--pink);display:flex;align-items:center;justify-content:center;
+  font-size:9px;transition:all .4s;z-index:2}
+.phase.lit .dot{border-color:var(--hot);background:var(--hot);box-shadow:0 0 0 5px rgba(255,78,142,.15)}
+.phase.lit .dot::after{content:'✓';color:#fff;font-weight:900;font-size:11px}
+.pcard{background:var(--glass);border:1.5px solid var(--hair);border-radius:22px;padding:16px 16px 8px;
+  backdrop-filter:blur(6px);transition:all .4s}
+.phase.lit .pcard{border-color:rgba(255,78,142,.55);background:linear-gradient(150deg,#FFF0F6,#FFE2EE);
+  box-shadow:0 10px 26px rgba(255,78,142,.16)}
+.phead{display:flex;align-items:baseline;gap:9px}
+.pemoji{font-size:19px}
+.ptime{font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:var(--hot);letter-spacing:1px}
+.pt{font-size:15.5px;font-weight:900;letter-spacing:1px}
+.pquote{font-size:10.5px;color:var(--sub);margin-top:1px;letter-spacing:.5px}
+.tasks{margin-top:10px}
+.task{display:flex;align-items:flex-start;gap:10px;padding:9px 6px;border-radius:14px;cursor:pointer;transition:background .2s;position:relative}
+.task:hover{background:rgba(255,78,142,.05)}
+.tick{flex:none;width:21px;height:21px;border-radius:50%;border:2px solid var(--pink);
+  display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;font-weight:900;transition:all .2s;margin-top:3px}
+.task.done .tick{background:var(--hot);border-color:var(--hot);color:#fff}
+.tname{font-size:13.5px;font-weight:700;letter-spacing:.5px}
+.tsub{font-size:10.5px;color:var(--sub);margin-top:1px}
+.task.done .tname{color:var(--hot2)}
+.full2{display:none;text-align:center;padding:8px 0 10px;font-size:11px;color:var(--hot2);font-weight:900;letter-spacing:2px}
+.phase.lit .full2{display:block}
+
+footer{margin-top:40px;text-align:center;font-size:11.5px;color:var(--sub);letter-spacing:1.5px;line-height:2.1;font-family:'Noto Sans SC',sans-serif}
+footer .fine{display:block;font-size:10px;opacity:.7;margin-top:6px}
+#toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,14px);z-index:60;background:var(--ink);
+  color:#fff;padding:11px 24px;border-radius:999px;font-size:12.5px;letter-spacing:2px;opacity:0;pointer-events:none;transition:all .3s}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.spark{position:fixed;width:7px;height:7px;border-radius:50%;pointer-events:none;z-index:70;animation:fall 1s forwards}
+@keyframes fall{to{transform:translateY(42vh) rotate(520deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Pretty Girl's Day</div>
+    <h1>精致女孩的一天<span class="en">from sunrise to starlight</span></h1>
+    <div class="sub">从早到晚 · 把自己过成一件作品</div>
+    <div class="hero-band"></div>
+  </header>
+
+  <div class="today">
+    <div class="trow"><span class="tdate" id="tdate"></span><span class="tstars" id="tstars">☆☆☆☆☆☆</span></div>
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="tmeta"><span>今日精致度</span><span id="tPct">0 / 6 时段</span></div>
+    <div class="quote">
+      <div class="q-en" id="qEn"></div>
+      <div class="q-zh" id="qZh"></div>
+      <button class="q-btn" id="qBtn">换一句 ✦</button>
+    </div>
+    <div class="full" id="fullBadge">今天，满分精致 ✨ 你值得今晚好好睡</div>
+  </div>
+
+  <div class="tl" id="tl"></div>
+
+  <footer>
+    漏掉一两项也没关系 —— 精致是自己的节奏，不是任务清单。<br>
+    <span class="fine">数据只存在你自己的设备里 · Pretty Girl's Day</span>
+  </footer>
+</div>
+<div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s);
+const K="prettyday_v1";
+function todayKey(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+
+const PHASES=[
+ {t:"早晨",time:"7:00",emoji:"🌅",tip:"阳光叫醒你，而不是消息",tasks:[
+   ["不赖床，拉开窗帘","让阳光先进来"],
+   ["一杯温水","唤醒身体的第一件事"],
+   ["认真吃早餐","坐下来吃，别边走边吃"]]},
+ {t:"上午",time:"9:00",emoji:"☀️",tip:"最难的事，放在精神最好的时候",tasks:[
+   ["写下今天最重要的三件事","三件就够"],
+   ["先啃最硬的那一件","拖最久的，最先解决"],
+   ["桌面保持干净","桌面清爽，脑子才清爽"]]},
+ {t:"午后",time:"14:00",emoji:"🌸",tip:"下午最容易垮，精致的秘诀是补",tasks:[
+   ["站起来走动 5 分钟","久坐是精致的天敌"],
+   ["补一次防晒","紫外线不留情面"],
+   ["少糖下午茶","甜留在舌尖，别留在脸上"]]},
+ {t:"傍晚",time:"18:00",emoji:"🌆",tip:"把这一天还给自己",tasks:[
+   ["运动 30 分钟","内啡肽，最便宜的快乐"],
+   ["洗一个认真的澡","水温刚好，时间充裕"],
+   ["换上舒服的居家服","仪式感从换衣服开始"]]},
+ {t:"夜晚",time:"20:30",emoji:"🌙",tip:"夜晚属于充电和放松",tasks:[
+   ["认真护肤","一步一步来，不糊弄"],
+   ["读 10 页书","任何书，读了就算"],
+   ["写明天的三件事","睡前定好，醒来就出发"]]},
+ {t:"深夜前",time:"23:00",emoji:"✨",tip:"睡前的最后一道工序",tasks:[
+   ["手机放远一点","它不配睡在你旁边"],
+   ["23:30 前关灯","美容觉是真的"]]}
+];
+const QUOTES=[
+ ["\"You can be anything.\"","—— Barbie"],
+ ["\"Pink is the navy blue of India.\"","粉色是印度的藏青色 —— Diana Vreeland"],
+ ["\"Dress shabbily and they remember the dress; dress impeccably and they remember the woman.\"","穿得潦草，人们记住衣服；穿得无可挑剔，人们记住你 —— Coco Chanel"],
+ ["\"Simplicity is the keynote of all true elegance.\"","简约是一切真正优雅的基调 —— Coco Chanel"],
+ ["\"Elegance is the only beauty that never fades.\"","优雅是唯一不会褪色的美 —— 奥黛丽·赫本"]
+];
+
+let S;try{S=JSON.parse(localStorage.getItem(K))||{}}catch(e){S={}}
+const k=todayKey();
+if(!S[k])S[k]=PHASES.map(p=>p.tasks.map(()=>false));
+Object.keys(S).forEach(d=>{if(d!==k)delete S[d]});   // 只留今天
+function save(){localStorage.setItem(K,JSON.stringify(S))}
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),1800)}
+function spark(x,y,n=16){
+  const cs=["#FF4E8E","#E8B04B","#FFD3E4","#E93A7D","#fff"];
+  for(let i=0;i<n;i++){
+    const s=document.createElement("div");s.className="spark";
+    s.style.left=(x-3+(Math.random()*56-28))+"px";s.style.top=(y-3+(Math.random()*36-18))+"px";
+    s.style.background=cs[i%cs.length];s.style.width=s.style.height=(3+Math.random()*5)+"px";
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1000);
+  }
+}
+
+let qi=new Date().getDate()%QUOTES.length;
+function renderQ(){$("#qEn").textContent=QUOTES[qi][0];$("#qZh").textContent=QUOTES[qi][1]}
+$("#qBtn").addEventListener("click",()=>{qi=(qi+1)%QUOTES.length;renderQ();const r=$("#quote")||$(".quote");spark(event.clientX||innerWidth/2,event.clientY||300,8)});
+
+function renderAll(){
+  const tl=$("#tl");tl.innerHTML="";
+  let done=0,total=0;
+  PHASES.forEach((p,pi)=>{
+    const box=document.createElement("div");
+    const all=p.tasks.map((t,i)=>S[k][pi][i]);
+    const lit=all.every(x=>x);
+    box.className="phase"+(lit?" lit":"");
+    if(lit)done++;
+    box.innerHTML=`<div class="dot"></div><div class="pcard">
+      <div class="phead"><span class="pemoji">${p.emoji}</span><span class="ptime">${p.time}</span><span class="pt">${p.t}</span></div>
+      <div class="pquote">${p.tip}</div>
+      <div class="tasks">${p.tasks.map((t,i)=>`
+        <div class="task ${S[k][pi][i]?"done":""}" data-p="${pi}" data-i="${i}">
+          <span class="tick">✓</span><span><div class="tname">${t[0]}</div><div class="tsub">${t[1]}</div></span>
+        </div>`).join("")}</div>
+      <div class="full2">— ${p.t}点亮 ✦ —</div></div>`;
+    box.querySelectorAll(".task").forEach(el=>el.addEventListener("click",e=>{
+      const pi2=+el.dataset.p,i2=+el.dataset.i;
+      S[k][pi2][i2]=!S[k][pi2][i2];save();
+      if(S[k][pi2][i2]){
+        spark(e.clientX,e.clientY,14);
+        const nowAll=PHASES[pi2].tasks.map((_,j)=>S[k][pi2][j]).every(x=>x);
+        if(nowAll){toast(PHASES[pi2].t+"点亮 ✦");spark(innerWidth/2,innerHeight*.35,20)}
+        else toast("又精致了一步 💗");
+      }else toast("先放一放，随时回来");
+      renderAll();
+    }));
+    tl.appendChild(box);
+    total++;
+  });
+  $("#fill").style.width=(done/total*100)+"%";
+  $("#tPct").textContent=done+" / 6 时段";
+  $("#tstars").innerHTML=Array.from({length:6},(_,i)=>`<span class="${i<done?"on":""}">★</span>`).join("");
+  $("#fullBadge").classList.toggle("show",done===6);
+  const wd="日一二三四五六"[new Date().getDay()];
+  $("#tdate").textContent=k.slice(5)+" · 周"+wd;
+}
+renderQ();renderAll();
+</script>
+</body>
+</html>
